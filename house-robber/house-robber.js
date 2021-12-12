@@ -3,13 +3,13 @@
  * @return {number}
  */
 var rob = function(nums) {
-    let using = 0
     let avoid = 0
+    let using = 0
     
-    for (let i=0; i< nums.length; i++) {
-        let max = Math.max(using, avoid)
-        using = nums[i] + avoid
-        avoid = max
+    for (let num of nums) {
+        let temp = avoid
+        avoid = Math.max(avoid, using)
+        using = temp + num
     }
-    return Math.max(using, avoid)
+    return Math.max(avoid, using)
 };
