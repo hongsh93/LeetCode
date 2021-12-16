@@ -5,35 +5,22 @@
  */
 
 var coinChange = function(coins, amount) {
-    if (amount === 0) {
-        return 0
-    }
-    let dp = Array(amount+1).fill(0)
+    let l = coins.length
+    let dp = Array(amount+1).fill(-1)
+    dp[0] = 0
     
-    for (let coin of coins) {
-        if (coin <= amount) {
-            dp[coin] = 1
-        }
-    }
-    for (let i=1; i<dp.length; i++) {
+    for (let i=1; i<=amount; i++) {
+        let temp = []
         for (let coin of coins) {
-            if (dp[i] > 0) {
-                if (i>coin && dp[i-coin]>0) {
-                    dp[i] = Math.min(dp[i], dp[i-coin]+1)
-                }
-            }
-            else {
-                if (i>coin && dp[i-coin]>0) {
-                    dp[i] = dp[i-coin]+1
-                }
+            if (i-coin >= 0 && dp[i-coin] > -1) {
+                temp.push(dp[i-coin]+1)
             }
         }
+        dp[i] = Math.min(...temp)
     }
-    return dp[amount] > 0 ? dp[amount] : -1
-
-};
-
-
+    console.info(dp)
+    return dp[amount] <= amount ? dp[amount] : -1
+}
 
 
 
@@ -47,6 +34,62 @@ var coinChange = function(coins, amount) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// var coinChange = function(coins, amount) {
+//     if (amount === 0) {
+//         return 0
+//     }
+//     let dp = Array(amount+1).fill(0)
+    
+//     for (let coin of coins) {
+//         if (coin <= amount) {
+//             dp[coin] = 1
+//         }
+//     }
+//     for (let i=1; i<dp.length; i++) {
+//         for (let coin of coins) {
+//             if (dp[i] > 0) {
+//                 if (i>coin && dp[i-coin]>0) {
+//                     dp[i] = Math.min(dp[i], dp[i-coin]+1)
+//                 }
+//             }
+//             else {
+//                 if (i>coin && dp[i-coin]>0) {
+//                     dp[i] = dp[i-coin]+1
+//                 }
+//             }
+//         }
+//     }
+//     return dp[amount] > 0 ? dp[amount] : -1
+
+// };
 
 // var coinChange = function(coins, amount) {
 //     if (amount === 0){
