@@ -5,7 +5,6 @@
 
 var countArrangement = function(n) {
     let res = 0
-    let nums = Array(n).fill().map((cur, idx) => idx+1)
     let seen = new Set()
     
     const count = function(num) {
